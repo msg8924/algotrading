@@ -20,6 +20,7 @@ class MovingAverageCrossingStrategy:
     def run_strategy(self):
         self.data = utils.download_data([self.stock], start_date=self.start_date, end_date=self.end_date)
         self.data = ma.compute_signals(self.data, self.stock)
+        self.data = self.data.dropna()
         purchase_price = 0
         for index, row in self.data.iterrows():
             date = index.strftime("%Y-%m-%d")
